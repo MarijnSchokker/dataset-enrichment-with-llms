@@ -1,0 +1,27 @@
+{
+    "is_pet_friendly": {
+        "was_extracted": true,
+        "quote": "Pets not allowed",
+        "value": false
+    },
+    "has_garden": {
+        "was_extracted": false,
+        "quote": null,
+        "value": null
+    }, 
+    "has_parking_place": {
+        "was_extracted": true,
+        "quote": "Parking possibility: Permit with the municipality (please check waiting list on the website of the municipality)",
+        "value": true
+    },
+    "is_suitable_for_couple": {
+        "was_extracted": true,
+        "quote": null,
+        "value": true
+    },
+    "has_balcony": {
+        "was_extracted": true,
+        "quote": "French balcony",
+        "value": true
+    }
+}

@@ -1,0 +1,27 @@
+{
+    "is_pet_friendly": {
+        "was_extracted": true,
+        "quote": "No Pets",
+        "value": false
+    },
+    "has_garden": {
+        "was_extracted": true,
+        "quote": "The garden, just recently landscaped by an architect, is for the exclusive use of the residents and they also have the option to store a bicycle/motorcycle/scooter under the covered area.",
+        "value": true
+    },
+    "has_parking_place": {
+        "was_extracted": true,
+        "quote": "Parking in front of the building is available through a permit system",
+        "value": true
+    },
+    "is_suitable_for_couple": {
+        "was_extracted": true,
+        "quote": null,
+        "value": true
+    },
+    "has_balcony": {
+        "was_extracted": true,
+        "quote": "with a balcony",
+        "value": true
+    }
+}

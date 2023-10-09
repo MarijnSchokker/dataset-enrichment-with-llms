@@ -1,0 +1,27 @@
+{
+    "is_pet_friendly": {
+        "was_extracted": false,
+        "quote": null,
+        "value": null
+    },
+    "has_garden": {
+        "was_extracted": true,
+        "quote": "with terrace-garden at the back",
+        "value": true
+    }, 
+    "has_parking_place": {
+        "was_extracted": false,
+        "quote": null,
+        "value": null
+    },
+    "is_suitable_for_couple": {
+        "was_extracted": true,
+        "quote": null,
+        "value": true
+    },
+    "has_balcony": {
+        "was_extracted": false,
+        "quote": null,
+        "value": null
+    }
+}
