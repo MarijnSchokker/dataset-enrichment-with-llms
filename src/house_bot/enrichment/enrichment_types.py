@@ -129,8 +129,5 @@ class House:
         return str_repr
 
 
-FIRESTORE_CREDENTIAL = credentials.Certificate(
-    "./pararius_cache/pararius-scraper-379017-firebase-adminsdk-az1jf-7011292b46.json"
-)
-CACHE_FOLDER_NAME = os.environ.get("CACHE_FOLDER_NAME", "./pararius_cache")
-HOUSES_CACHE = Path(CACHE_FOLDER_NAME) / "houses_from_firestore.parquet"
+CACHE_FOLDER_NAME = os.environ.get("CACHE_FOLDER_NAME", "./data")
+HOUSES_CACHE = Path(CACHE_FOLDER_NAME) / "houses.parquet"

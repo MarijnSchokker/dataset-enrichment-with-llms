@@ -1,34 +1,10 @@
 import json
 from pathlib import Path
 from house_bot.enrichment.enrichment_types import HOUSES_CACHE
-from house_bot.enrichment.enrichment_types import FIRESTORE_CREDENTIAL, House, HouseFeatures
-from house_bot.storage.firestore import FirestoreAccess
+from house_bot.enrichment.enrichment_types import House, HouseFeatures
 
 
 import pandas as pd
-from google.cloud.firestore_v1.collection import CollectionReference
-
-
-def fetch_housing_data_from_database(
-    firestore: FirestoreAccess | None = None,
-) -> pd.DataFrame:
-    # Initialize Firestore
-    if firestore is None:
-        firestore = FirestoreAccess()
-        firestore.connect(credential=FIRESTORE_CREDENTIAL)
-
-    # Get all houses where description is not empty
-    houses_collection: CollectionReference = firestore.get_houses_collection()
-    houses_snapshots = houses_collection.where("description", "!=", "").get()
-
-    # Convert to Pandas DataFrame
-    houses_dicts: list[dict] = [house.to_dict() for house in houses_snapshots]
-    houses = pd.DataFrame(houses_dicts)
-
-    # drop coordinates because the type is complicated
-    houses = houses.drop(columns=["coordinates"])
-
-    return houses
 
 
 def fetch_housing_data_from_disk(cache_file: Path) -> pd.DataFrame:
@@ -44,8 +20,7 @@ def fetch_housing_data(
     ignore_cache: bool,
 ) -> pd.DataFrame:
     if ignore_cache or not cache_file.exists():
-        houses = fetch_housing_data_from_database()
-        save_housing_data_to_disk(houses=houses, cache_file=cache_file)
+        raise ValueError("cache file must exist")
     else:
         houses = fetch_housing_data_from_disk(cache_file=cache_file)
 

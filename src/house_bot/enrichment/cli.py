@@ -1,18 +1,12 @@
 from pathlib import Path
-import tempfile
-import numpy as np
 
 import mlflow
 import mlflow.llm
 import typer
 from house_bot.enrichment.enrichment_strategies import enrich_house_with_llm
-from house_bot.enrichment.enrichment_types import CACHE_FOLDER_NAME, FIRESTORE_CREDENTIAL, HOUSES_CACHE, House, HouseFeature, HouseFeatures, LLMMethod
-from house_bot.enrichment.house_descriptions import add_house_details
+from house_bot.enrichment.enrichment_types import CACHE_FOLDER_NAME, HOUSES_CACHE, House, HouseFeature, HouseFeatures, LLMMethod
 from house_bot.enrichment.housing_data_io import fetch_house_from_disk, fetch_housing_data, load_house_features, save_house_features
-from house_bot.storage.firestore import FirestoreAccess
-from google.cloud.firestore_v1.collection import CollectionReference
 import pandas as pd
-from google.cloud.firestore_v1.document import DocumentReference, DocumentSnapshot
 
 
 app = typer.Typer()
@@ -197,53 +191,6 @@ def enrich_and_score_house(house_id: str, method: LLMMethod, cache_file: Path = 
 
         # 2) compute and log enrichment score
         compute_and_log_enrichment_score(house_features, house_id)
-
-
-def add_house_description(house_id: str, firestore: FirestoreAccess):
-    houses_collection: CollectionReference = firestore.get_houses_collection()
-
-    house_ref: DocumentReference = houses_collection.document(house_id)
-    house_doc: DocumentSnapshot = house_ref.get()
-
-    house = house_doc.to_dict()
-
-    if house.get("description") is not None:
-        print(f"{house_ref.id} already has description")
-        return
-    if house.get("is_available") is False:
-        print(f"{house_ref.id} is not available")
-        return
-
-    house_details: pd.Series | None = add_house_details(house)
-    if house_details is None:
-        return
-    else:
-        house.update(house_details.to_dict())
-        firestore.add_houses([house])
-
-
-@app.command()
-def find_and_add_house_description(house_id: str):
-    firestore = FirestoreAccess()
-    firestore.connect(credential=FIRESTORE_CREDENTIAL)
-    add_house_description(house_id, firestore=firestore)
-    firestore.close()
-
-
-@app.command()
-def find_and_add_house_descriptions():
-    # Initialize Firestore
-    firestore = FirestoreAccess()
-    firestore.connect(credential=FIRESTORE_CREDENTIAL)
-
-    # loop all documents in houses_collection
-    houses_collection: CollectionReference = firestore.get_houses_collection()
-    for house_doc in houses_collection.order_by(
-        "publish_time", direction="DESCENDING"
-    ).stream():
-        add_house_description(house_doc.id, firestore=firestore)
-
-    firestore.close()
 
 
 if __name__ == "__main__":
