@@ -1,5 +1,5 @@
 [project]
-name = "pararius-scraper"
+name = "dataset-enrichment-with-llms"
 version = "0.0.0"
 dynamic = ["dependencies"]
 
