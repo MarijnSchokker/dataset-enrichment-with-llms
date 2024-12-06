@@ -1,0 +1,3 @@
+services:
+  python-dev:
+    build: app

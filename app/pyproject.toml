@@ -1,5 +1,5 @@
 [project]
-name = "pararius-scraper"
+name = "dataset-enrichment-with-llms"
 version = "0.0.0"
 dynamic = ["dependencies"]
 
@@ -15,6 +15,6 @@ tests = [
     "pytest==7.2.1",
     "pytest-cov==4.0.0",
     "fastparquet==2023.2.0",
-    "anyio==3.6.2",
+    "anyio==3.7.1",
     "httpx==0.24.0"
 ]
