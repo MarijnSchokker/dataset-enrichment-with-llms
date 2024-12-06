@@ -6,6 +6,7 @@ WORKDIR /app
 COPY pyproject.toml /app
 COPY requirements.txt /app
 COPY src /app/src
+COPY tests /app/tests
 
 # install project
 RUN pip install /app[quality_checks,tests]
