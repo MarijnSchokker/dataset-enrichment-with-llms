@@ -1,0 +1,1 @@
+docker-compose run python-dev pytest /app/tests
