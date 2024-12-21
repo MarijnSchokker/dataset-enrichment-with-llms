@@ -128,6 +128,8 @@ class House:
 
         return str_repr
 
+# TODO: differences with scraper:
+# FIRESTORE_CREDENTIAL used to be here
 
 CACHE_FOLDER_NAME = os.environ.get("CACHE_FOLDER_NAME", "./data")
 HOUSES_CACHE = Path(CACHE_FOLDER_NAME) / "houses.parquet"

@@ -19,3 +19,7 @@ class HousingPlatform:
 
     async def solve_captcha(page: Page) -> bool:
         raise NotImplementedError
+
+# TODO: differences with scrapper repo: 
+# In platforms/pararius/platform.py all these functions are implemented.
+# In platforms/pararius/captcha.py is_on_captcha_page & solve_captcha are implemented.
