@@ -14,9 +14,13 @@ from typing import Optional
 class LLMMethod(str, Enum):
     mock = "mock"
     
-    gpt_35_json_example = "gpt-35-json-example"
-    gpt_35_pydantic_schema = "gpt-35-pydantic-schema"
-    gpt_35 = "gpt-35" # function calling
+    # gpt_35_json_example = "gpt-35-json-example"
+    # gpt_35_pydantic_schema = "gpt-35-pydantic-schema"
+    # gpt_35 = "gpt-35"
+    # replaced above
+    gpt_4omini_json_example = "gpt-4omini-json-example"
+    gpt_4omini_pydantic_schema = "gpt-4omini-pydantic-schema"
+    gpt_4omini = "gpt-4omini" # function calling
     
     gpt_4_json_example = "gpt-4-json-example"
     gpt_4_pydantic_schema = "gpt-4-pydantic-schema"

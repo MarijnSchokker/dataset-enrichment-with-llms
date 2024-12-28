@@ -21,27 +21,27 @@ def enrich_house_with_mock(house: House) -> HouseFeatures:
 
 
 def enrich_house_with_llm(
-    house: House, method: LLMMethod = LLMMethod.gpt_35
+    house: House, method: LLMMethod = LLMMethod.gpt_4omini
 ) -> HouseFeatures:
     match method:
         case LLMMethod.mock:
             return enrich_house_with_mock(house)
-        case LLMMethod.gpt_35_json_example:
+        case LLMMethod.gpt_4omini_json_example:
             return openai_gpt.json_example(
                 house,
-                model="gpt-3.5-turbo-0613",
+                model="gpt-4o-mini", # replaced gpt-3.5-turbo-0613
                 deployment_id="gpt-35-turbo-us",
             )
-        case LLMMethod.gpt_35_pydantic_schema:
+        case LLMMethod.gpt_4omini_pydantic_schema:
             return openai_gpt.pydantic_schema(
                 house,
-                model="gpt-3.5-turbo-0613",
+                model="gpt-4o-mini", # replaced gpt-3.5-turbo-0613
                 deployment_id="gpt-35-turbo-us",
             )
-        case LLMMethod.gpt_35:
+        case LLMMethod.gpt_4omini:
             return openai_gpt.function_calling(
                 house,
-                model="gpt-3.5-turbo-0613",
+                model="gpt-4o-mini", # replaced gpt-3.5-turbo-0613
                 deployment_id="gpt-35-turbo-us",
             )
         case LLMMethod.gpt_4_json_example:
