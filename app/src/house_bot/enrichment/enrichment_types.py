@@ -31,7 +31,7 @@ class LLMMethod(str, Enum):
 
 
 class HouseFeature(OpenAISchema):
-    was_extracted: bool = Field(..., description="Whether the feature was extracted")
+    was_extracted: bool = Field(description="Whether the feature was extracted")
     quote: Optional[str] = Field(
         default=None, description="Exact quote from the listing"
     )

@@ -29,38 +29,32 @@ def enrich_house_with_llm(
         case LLMMethod.gpt_4omini_json_example:
             return openai_gpt.json_example(
                 house,
-                model="gpt-4o-mini", # replaced gpt-3.5-turbo-0613
-                deployment_id="gpt-35-turbo-us",
+                model="gpt-4o-mini" # replaced gpt-3.5-turbo-0613
             )
         case LLMMethod.gpt_4omini_pydantic_schema:
             return openai_gpt.pydantic_schema(
                 house,
-                model="gpt-4o-mini", # replaced gpt-3.5-turbo-0613
-                deployment_id="gpt-35-turbo-us",
+                model="gpt-4o-mini" # replaced gpt-3.5-turbo-0613
             )
         case LLMMethod.gpt_4omini:
             return openai_gpt.function_calling(
                 house,
-                model="gpt-4o-mini", # replaced gpt-3.5-turbo-0613
-                deployment_id="gpt-35-turbo-us",
+                model="gpt-4o-mini" # replaced gpt-3.5-turbo-0613
             )
         case LLMMethod.gpt_4_json_example:
             return openai_gpt.json_example(
                 house,
-                model="gpt-4",
-                deployment_id="gpt-4-us",
+                model="gpt-4"
             )
         case LLMMethod.gpt_4_pydantic_schema:
             return openai_gpt.pydantic_schema(
                 house,
-                model="gpt-4",
-                deployment_id="gpt-4-us",
+                model="gpt-4"
             )
         case LLMMethod.gpt_4:
             return openai_gpt.function_calling(
                 house,
-                model="gpt-4",
-                deployment_id="gpt-4-us",
+                model="gpt-4"
             )
         case LLMMethod.palm_2_json_example:
             return google_palm.json_schema(house)

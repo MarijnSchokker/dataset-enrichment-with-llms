@@ -6,6 +6,8 @@ WORKDIR /app
 COPY pyproject.toml /app
 COPY requirements.txt /app
 COPY src /app/src
+COPY data /app/data
+COPY house_features_validation_data /app/house_features_validation_data
 COPY tests /app/tests
 
 # install project
