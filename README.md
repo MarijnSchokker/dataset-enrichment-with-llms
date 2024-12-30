@@ -10,6 +10,8 @@ https://summit.datamass.io/
 https://www.youtube.com/watch?v=hJeMtABYkEQ
 
 # Set-up
+Before running the project, make sure to update the `.env` file with your secret OpenAI API key. You can obtain your API key from the [OpenAI website](https://platform.openai.com/api-keys).
+
 You can test the CLI by running the following script:
 ```bash
 ./bin/cli.sh --help
