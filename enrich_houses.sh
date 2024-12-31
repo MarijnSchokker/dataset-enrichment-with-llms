@@ -48,18 +48,6 @@ MLFLOW_EXPERIMENT_NAME="Batch 1" python -m house_bot.enrichment.cli enrich-and-s
 MLFLOW_EXPERIMENT_NAME="Batch 1" python -m house_bot.enrichment.cli enrich-and-score-house fe1aaba9 gpt-4-json-example
 MLFLOW_EXPERIMENT_NAME="Batch 1" python -m house_bot.enrichment.cli enrich-and-score-house edfebeac gpt-4-json-example
 
-## PaLM 2
-MLFLOW_EXPERIMENT_NAME="Batch 1" python -m house_bot.enrichment.cli enrich-and-score-house d2a2d924 palm-2-json-example
-MLFLOW_EXPERIMENT_NAME="Batch 1" python -m house_bot.enrichment.cli enrich-and-score-house 3af436a8 palm-2-json-example
-MLFLOW_EXPERIMENT_NAME="Batch 1" python -m house_bot.enrichment.cli enrich-and-score-house 3518ba1c palm-2-json-example
-MLFLOW_EXPERIMENT_NAME="Batch 1" python -m house_bot.enrichment.cli enrich-and-score-house 2a54c6e5 palm-2-json-example
-MLFLOW_EXPERIMENT_NAME="Batch 1" python -m house_bot.enrichment.cli enrich-and-score-house e95a9f51 palm-2-json-example
-MLFLOW_EXPERIMENT_NAME="Batch 1" python -m house_bot.enrichment.cli enrich-and-score-house c14b5de7 palm-2-json-example
-MLFLOW_EXPERIMENT_NAME="Batch 1" python -m house_bot.enrichment.cli enrich-and-score-house 1cae07e6 palm-2-json-example
-MLFLOW_EXPERIMENT_NAME="Batch 1" python -m house_bot.enrichment.cli enrich-and-score-house d27ecb4b palm-2-json-example
-MLFLOW_EXPERIMENT_NAME="Batch 1" python -m house_bot.enrichment.cli enrich-and-score-house fe1aaba9 palm-2-json-example
-MLFLOW_EXPERIMENT_NAME="Batch 1" python -m house_bot.enrichment.cli enrich-and-score-house edfebeac palm-2-json-example
-
 # Pydantic schema
 ## GPT-4o-mini
 MLFLOW_EXPERIMENT_NAME="Batch 1" python -m house_bot.enrichment.cli enrich-and-score-house d2a2d924 gpt-4omini-pydantic-schema
@@ -84,15 +72,3 @@ MLFLOW_EXPERIMENT_NAME="Batch 1" python -m house_bot.enrichment.cli enrich-and-s
 MLFLOW_EXPERIMENT_NAME="Batch 1" python -m house_bot.enrichment.cli enrich-and-score-house d27ecb4b gpt-4-pydantic-schema
 MLFLOW_EXPERIMENT_NAME="Batch 1" python -m house_bot.enrichment.cli enrich-and-score-house fe1aaba9 gpt-4-pydantic-schema
 MLFLOW_EXPERIMENT_NAME="Batch 1" python -m house_bot.enrichment.cli enrich-and-score-house edfebeac gpt-4-pydantic-schema
-
-## PaLM 2
-MLFLOW_EXPERIMENT_NAME="Batch 1" python -m house_bot.enrichment.cli enrich-and-score-house d2a2d924 palm-2
-MLFLOW_EXPERIMENT_NAME="Batch 1" python -m house_bot.enrichment.cli enrich-and-score-house 3af436a8 palm-2
-MLFLOW_EXPERIMENT_NAME="Batch 1" python -m house_bot.enrichment.cli enrich-and-score-house 3518ba1c palm-2
-MLFLOW_EXPERIMENT_NAME="Batch 1" python -m house_bot.enrichment.cli enrich-and-score-house 2a54c6e5 palm-2
-MLFLOW_EXPERIMENT_NAME="Batch 1" python -m house_bot.enrichment.cli enrich-and-score-house e95a9f51 palm-2
-MLFLOW_EXPERIMENT_NAME="Batch 1" python -m house_bot.enrichment.cli enrich-and-score-house c14b5de7 palm-2
-MLFLOW_EXPERIMENT_NAME="Batch 1" python -m house_bot.enrichment.cli enrich-and-score-house 1cae07e6 palm-2
-MLFLOW_EXPERIMENT_NAME="Batch 1" python -m house_bot.enrichment.cli enrich-and-score-house d27ecb4b palm-2
-MLFLOW_EXPERIMENT_NAME="Batch 1" python -m house_bot.enrichment.cli enrich-and-score-house fe1aaba9 palm-2
-MLFLOW_EXPERIMENT_NAME="Batch 1" python -m house_bot.enrichment.cli enrich-and-score-house edfebeac palm-2

@@ -5,7 +5,6 @@ from house_bot.enrichment.enrichment_types import (
     HouseFeatures,
     LLMMethod,
 )
-from house_bot.enrichment.llms import google_palm
 from house_bot.enrichment.llms import openai_gpt
 
 
@@ -49,6 +48,7 @@ def enrich_house_with_llm(
         enriched_house = enrich_house_with_llm(my_house, LLMMethod.gpt_4)
     Notes:
         - The previously used gpt-3.5-turbo-0613 model has been replaced by gpt-4o-mini, based on provider's recommendations.
+        - The previously used PaLM 2 model has been removed, as it will soon be deprecated.
     """
     match method:
         case LLMMethod.mock:
@@ -83,9 +83,5 @@ def enrich_house_with_llm(
                 house,
                 model="gpt-4"
             )
-        case LLMMethod.palm_2_json_example:
-            return google_palm.json_schema(house)
-        case LLMMethod.palm_2: # pydantic schema
-            return google_palm.pydantic_schema(house)
         case _:
             raise ValueError(f"Unknown method {method}")

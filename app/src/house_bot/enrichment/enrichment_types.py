@@ -25,14 +25,11 @@ class LLMMethod(str, Enum):
         LLMMethod.gpt_4: Performs function calling with the gpt-4 model.
 
     Notes:
-        - The previously used gpt-3.5-turbo-0613 model has been replaced by gpt-4o-mini, based on provider's recommendations.
+        - The attributes related to the gpt-3.5 model have been replaced by gpt-4o-mini, based on provider's recommendations.
+        - The attributes related to the PaLM 2 model have been removed, as it will soon be deprecated.
     """
     mock = "mock"
     
-    # gpt_35_json_example = "gpt-35-json-example"
-    # gpt_35_pydantic_schema = "gpt-35-pydantic-schema"
-    # gpt_35 = "gpt-35"
-    # replaced above
     gpt_4omini_json_example = "gpt-4omini-json-example"
     gpt_4omini_pydantic_schema = "gpt-4omini-pydantic-schema"
     gpt_4omini = "gpt-4omini" # function calling
@@ -40,9 +37,6 @@ class LLMMethod(str, Enum):
     gpt_4_json_example = "gpt-4-json-example"
     gpt_4_pydantic_schema = "gpt-4-pydantic-schema"
     gpt_4 = "gpt-4" # function calling
-
-    palm_2_json_example = "palm-2-json-example"
-    palm_2 = "palm-2" # pydantic schema
 
 
 class HouseFeature(OpenAISchema):
