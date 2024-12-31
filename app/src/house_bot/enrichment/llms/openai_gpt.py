@@ -162,21 +162,18 @@ def function_calling(
     Optionally, the function logs the parameters and predictions to MLflow if an active run exists.
 
     Parameters:
-    ----------
-    house : House
-        An instance of the House class containing unstructured listing information.
-    model : str
-        The identifier of the OpenAI language model to be used.
+        house : House
+            An instance of the House class containing unstructured listing information.
+        model : str
+            The identifier of the OpenAI language model to be used.
 
     Returns:
-    -------
-    HouseFeatures
-        An instance of HouseFeatures containing the extracted structured data.
+        HouseFeatures
+            An instance of HouseFeatures containing the extracted structured data.
 
     Notes:
-    -----
-    - The function has been modified to use the Structured Outputs OpenAI's chat completions to ensure 
-    the responses adhere to the required JSON schema.
+        - The function has been modified to use the Structured Outputs OpenAI's chat completions to ensure 
+        the responses adhere to the required JSON schema.
     """
     prompt = str(house)
 

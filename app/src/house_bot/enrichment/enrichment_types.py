@@ -12,6 +12,21 @@ from typing import Optional
 
 
 class LLMMethod(str, Enum):
+    """
+    Enum representing different methods for interacting with language models.
+
+    Attributes:
+        mock (str): A mock enrichment function.
+        LLMMethod.gpt_4omini_json_example: Uses a JSON schema template in the prompt for the gpt-4o-mini model
+        LLMMethod.gpt_4omini_pydantic_schema: Uses a Pydantic schema template in the prompt for the gpt-4o-mini model
+        LLMMethod.gpt_4omini: Performs function calling with the gpt-4o-mini model.
+        LLMMethod.gpt_4_json_example: Uses a JSON schema template in the prompt for the gpt-4 model.
+        LLMMethod.gpt_4_pydantic_schema: Uses a Pydantic schema template in the prompt for the gpt-4 model.
+        LLMMethod.gpt_4: Performs function calling with the gpt-4 model.
+
+    Notes:
+        - The previously used gpt-3.5-turbo-0613 model has been replaced by gpt-4o-mini, based on provider's recommendations.
+    """
     mock = "mock"
     
     # gpt_35_json_example = "gpt-35-json-example"
