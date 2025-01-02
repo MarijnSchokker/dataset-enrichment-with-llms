@@ -5,10 +5,9 @@ WORKDIR /app
 # copy project
 COPY pyproject.toml /app
 COPY requirements.txt /app
+RUN pip install /app[quality_checks,tests]
+
 COPY src /app/src
 COPY data /app/data
 COPY house_features_validation_data /app/house_features_validation_data
 COPY tests /app/tests
-
-# install project
-RUN pip install /app[quality_checks,tests]
