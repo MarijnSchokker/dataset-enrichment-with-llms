@@ -1,1 +1,2 @@
-docker-compose run python-dev pytest /app/tests
+#!/bin/bash
+docker-compose run --rm python-dev pytest /app/tests
