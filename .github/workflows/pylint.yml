@@ -2,7 +2,7 @@ name: pylint
 
 on:
   push:
-    branches: [ main, develop ]
+    branches: [ main, develop, ms/initial_state_index ]
   pull_request:
     branches: [ main, develop ]
 
