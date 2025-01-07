@@ -5,11 +5,12 @@ from house_bot.enrichment.enrichment_types import House, HouseFeatures
 import mlflow
 import mlflow.llm
 from openai import OpenAI
-import openai
+
+client = OpenAI()
 
 
 def json_example(
-    house: House, model: str, deployment_id: str
+    house: House, model: str
 ) -> HouseFeatures:
     prompt = """
     A house listing will follow, as it appeared on a housing website. Please use the template to extract information from the listing in a JSON response.
@@ -70,13 +71,10 @@ def json_example(
         "presence_penalty": 0.0,
         "frequency_penalty": 0.0,
     }
-    response = openai.ChatCompletion.create(
-        model=model,
-        deployment_id=deployment_id,
-        messages=messages,
-        **hyperparams,
-    )
-    response_text = response.choices[0]["message"]["content"]
+    response = client.chat.completions.create(model=model,
+    messages=messages,
+    **hyperparams)
+    response_text = response.choices[0].message.content
 
     # optionally log to MLflow
     is_run_active = mlflow.active_run is not None
@@ -94,7 +92,7 @@ def json_example(
 
 
 def pydantic_schema(
-    house: House, model: str, deployment_id: str
+    house: House, model: str
 ) -> HouseFeatures:
     output_template = HouseFeatures.model_json_schema()
     output_template_str = json.dumps(output_template)
@@ -128,13 +126,10 @@ def pydantic_schema(
         "presence_penalty": 0.0,
         "frequency_penalty": 0.0,
     }
-    response = openai.ChatCompletion.create(
-        model=model,
-        deployment_id=deployment_id,
-        messages=messages,
-        **hyperparams,
-    )
-    response_text = response.choices[0]["message"]["content"]
+    response = client.chat.completions.create(model=model,
+    messages=messages,
+    **hyperparams)
+    response_text = response.choices[0].message.content
 
     # optionally log to MLflow
     is_run_active = mlflow.active_run is not None

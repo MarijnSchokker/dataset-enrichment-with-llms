@@ -47,7 +47,7 @@ def enrich_house_with_llm(
     Example:
         enriched_house = enrich_house_with_llm(my_house, LLMMethod.gpt_4)
     Notes:
-        - The previously used gpt-3.5-turbo-0613 model has been replaced by gpt-4o-mini, based on provider's recommendations.
+        - The previously used gpt-4 model has been replaced by gpt-4o-mini, gpt-4 is no longer available.
         - The previously used PaLM 2 model has been removed, as it will soon be deprecated.
     """
     match method:
@@ -56,32 +56,32 @@ def enrich_house_with_llm(
         case LLMMethod.gpt_4omini_json_example:
             return openai_gpt.json_example(
                 house,
-                model="gpt-4o-mini" # replaced gpt-3.5-turbo-0613
+                model="gpt-4o-mini"
             )
         case LLMMethod.gpt_4omini_pydantic_schema:
             return openai_gpt.pydantic_schema(
                 house,
-                model="gpt-4o-mini" # replaced gpt-3.5-turbo-0613
+                model="gpt-4o-mini"
             )
         case LLMMethod.gpt_4omini:
             return openai_gpt.function_calling(
                 house,
-                model="gpt-4o-mini" # replaced gpt-3.5-turbo-0613
+                model="gpt-4o-mini"
             )
         case LLMMethod.gpt_4_json_example:
             return openai_gpt.json_example(
                 house,
-                model="gpt-4"
+                model="gpt-3.5-turbo"
             )
         case LLMMethod.gpt_4_pydantic_schema:
             return openai_gpt.pydantic_schema(
                 house,
-                model="gpt-4"
+                model="gpt-3.5-turbo"
             )
         case LLMMethod.gpt_4:
             return openai_gpt.function_calling(
                 house,
-                model="gpt-4"
+                model="gpt-3.5-turbo"
             )
         case _:
             raise ValueError(f"Unknown method {method}")

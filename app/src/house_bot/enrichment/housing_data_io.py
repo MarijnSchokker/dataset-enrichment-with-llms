@@ -38,7 +38,7 @@ def serialize_house(house: pd.Series) -> House:
 def fetch_house_from_disk(house_id: str, cache_file: Path = HOUSES_CACHE) -> House:
     houses = fetch_housing_data_from_disk(cache_file=cache_file)
     houses = houses.set_index("id")
-    house_pandas: pd.Series = houses.loc[house_id]
+    house_pandas: pd.Series = houses.loc[house_id].copy()
     house_pandas["id"] = house_id
     house = serialize_house(house_pandas)
     return house
