@@ -1,0 +1,1 @@
+docker-compose run --rm python-dev pytest --cov=/app --cov-report=term-missing /app/tests
