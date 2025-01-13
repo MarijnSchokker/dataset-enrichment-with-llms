@@ -4,10 +4,13 @@ from house_bot.enrichment.enrichment_types import House, HouseFeatures
 
 import mlflow
 import mlflow.llm
-import openai
+from openai import OpenAI
+
+client = OpenAI()
+
 
 def json_example(
-    house: House, model: str, deployment_id: str
+    house: House, model: str
 ) -> HouseFeatures:
     prompt = """
     A house listing will follow, as it appeared on a housing website. Please use the template to extract information from the listing in a JSON response.
@@ -68,13 +71,10 @@ def json_example(
         "presence_penalty": 0.0,
         "frequency_penalty": 0.0,
     }
-    response = openai.ChatCompletion.create(
-        model=model,
-        deployment_id=deployment_id,
-        messages=messages,
-        **hyperparams,
-    )
-    response_text = response.choices[0]["message"]["content"]
+    response = client.chat.completions.create(model=model,
+    messages=messages,
+    **hyperparams)
+    response_text = response.choices[0].message.content
 
     # optionally log to MLflow
     is_run_active = mlflow.active_run is not None
@@ -92,7 +92,7 @@ def json_example(
 
 
 def pydantic_schema(
-    house: House, model: str, deployment_id: str
+    house: House, model: str
 ) -> HouseFeatures:
     output_template = HouseFeatures.model_json_schema()
     output_template_str = json.dumps(output_template)
@@ -126,13 +126,10 @@ def pydantic_schema(
         "presence_penalty": 0.0,
         "frequency_penalty": 0.0,
     }
-    response = openai.ChatCompletion.create(
-        model=model,
-        deployment_id=deployment_id,
-        messages=messages,
-        **hyperparams,
-    )
-    response_text = response.choices[0]["message"]["content"]
+    response = client.chat.completions.create(model=model,
+    messages=messages,
+    **hyperparams)
+    response_text = response.choices[0].message.content
 
     # optionally log to MLflow
     is_run_active = mlflow.active_run is not None
@@ -149,13 +146,39 @@ def pydantic_schema(
     return house_features
 
 
-
 def function_calling(
-    house: House, model: str, deployment_id: str
+    house: House, model: str
 ) -> HouseFeatures:
+    """
+    Extract structured features from a housing listing using a language model.
+
+    This function takes an unstructured text representation of a house and
+    converts it into a structured format defined by the HouseFeatures class. 
+    Optionally, the function logs the parameters and predictions to MLflow if an active run exists.
+
+    Parameters:
+        house : House
+            An instance of the House class containing unstructured listing information.
+        model : str
+            The identifier of the OpenAI language model to be used.
+
+    Returns:
+        HouseFeatures
+            An instance of HouseFeatures containing the extracted structured data.
+
+    Notes:
+        - The function has been modified to use the Structured Outputs OpenAI's chat completions to ensure 
+        the responses adhere to the required JSON schema.
+    """
     prompt = str(house)
 
-    context = "Assistant is a large language model designed to extract structured data from text."
+    # initialize client
+    client = OpenAI()
+    tools = [openai.pydantic_function_tool(HouseFeatures)]
+
+    # construct the messages for the model
+    # uses context recommended in documentation
+    context = "You are an expert at structured data extraction. You will be given unstructured text from a housing listing and should convert it into the given structure."
     input_message = {
         "role": "system",
         "content": context,
@@ -165,6 +188,7 @@ def function_calling(
         input_message,
         prompt_message,
     ]
+
     hyperparams = {
         "temperature": 0.5,
         "top_p": 1.0,
@@ -173,15 +197,25 @@ def function_calling(
         "presence_penalty": 0.0,
         "frequency_penalty": 0.0,
     }
-    response = openai.ChatCompletion.create(
+
+    # call the model
+    response = client.chat.completions.create(
         model=model,
-        deployment_id=deployment_id,
-        functions=[HouseFeatures.openai_schema],
-        function_call={"name": HouseFeatures.openai_schema["name"]},
         messages=messages,
-        **hyperparams,
+        tools=tools,
+        **hyperparams
     )
+
+    # extract structured features from the response
     house_features = HouseFeatures.from_response(response)
+    # to see the json message check response.choices[0].message.tool_calls[0].function
+    print(response.choices[0].message.tool_calls[0].function) # TODO: if debug
+
+    # TODO: discuss how to resolve refusals!!!
+    # if response.choices[0].message.refusal is not None:
+    #     return ...
+    # else:
+    #     return <as it is>
 
     # optionally log to MLflow
     is_run_active = mlflow.active_run is not None

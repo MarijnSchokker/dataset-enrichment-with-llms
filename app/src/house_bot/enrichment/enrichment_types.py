@@ -12,22 +12,35 @@ from typing import Optional
 
 
 class LLMMethod(str, Enum):
+    """
+    Enum representing different methods for interacting with language models.
+
+    Attributes:
+        mock (str): A mock enrichment function.
+        LLMMethod.gpt_4omini_json_example: Uses a JSON schema template in the prompt for the gpt-4o-mini model
+        LLMMethod.gpt_4omini_pydantic_schema: Uses a Pydantic schema template in the prompt for the gpt-4o-mini model
+        LLMMethod.gpt_4omini: Performs function calling with the gpt-4o-mini model.
+        LLMMethod.gpt_4_json_example: Uses a JSON schema template in the prompt for the gpt-4 model.
+        LLMMethod.gpt_4_pydantic_schema: Uses a Pydantic schema template in the prompt for the gpt-4 model.
+        LLMMethod.gpt_4: Performs function calling with the gpt-4 model.
+
+    Notes:
+        - The attributes related to the gpt-3.5 model have been replaced by gpt-4o-mini, based on provider's recommendations.
+        - The attributes related to the PaLM 2 model have been removed, as it will soon be deprecated.
+    """
     mock = "mock"
     
-    gpt_35_json_example = "gpt-35-json-example"
-    gpt_35_pydantic_schema = "gpt-35-pydantic-schema"
-    gpt_35 = "gpt-35" # function calling
+    gpt_4omini_json_example = "gpt-4omini-json-example"
+    gpt_4omini_pydantic_schema = "gpt-4omini-pydantic-schema"
+    gpt_4omini = "gpt-4omini" # function calling
     
     gpt_4_json_example = "gpt-4-json-example"
     gpt_4_pydantic_schema = "gpt-4-pydantic-schema"
     gpt_4 = "gpt-4" # function calling
 
-    palm_2_json_example = "palm-2-json-example"
-    palm_2 = "palm-2" # pydantic schema
-
 
 class HouseFeature(OpenAISchema):
-    was_extracted: bool = Field(..., description="Whether the feature was extracted")
+    was_extracted: bool = Field(description="Whether the feature was extracted")
     quote: Optional[str] = Field(
         default=None, description="Exact quote from the listing"
     )
@@ -128,6 +141,8 @@ class House:
 
         return str_repr
 
+# TODO: differences with scraper:
+# FIRESTORE_CREDENTIAL used to be here
 
 CACHE_FOLDER_NAME = os.environ.get("CACHE_FOLDER_NAME", "./data")
 HOUSES_CACHE = Path(CACHE_FOLDER_NAME) / "houses.parquet"

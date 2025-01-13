@@ -8,6 +8,9 @@ from house_bot.enrichment.enrichment_types import CACHE_FOLDER_NAME, HOUSES_CACH
 from house_bot.enrichment.housing_data_io import fetch_house_from_disk, fetch_housing_data, load_house_features, save_house_features
 import pandas as pd
 
+# TODO: Differences with scrapper:  3 additional functions that were interacting with firestore 
+# add_house_description, find_and_add_house_description, find_and_add_house_descriptions
+
 
 app = typer.Typer()
 

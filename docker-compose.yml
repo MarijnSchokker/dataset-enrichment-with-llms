@@ -1,0 +1,4 @@
+services:
+  python-dev:
+    build: app
+    env_file: environment_vars.env

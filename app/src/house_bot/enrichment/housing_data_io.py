@@ -6,6 +6,9 @@ from house_bot.enrichment.enrichment_types import House, HouseFeatures
 
 import pandas as pd
 
+# TODO: difference with scraper:
+# additional function: fetch_housing_data_from_database
+
 
 def fetch_housing_data_from_disk(cache_file: Path) -> pd.DataFrame:
     return pd.read_parquet(cache_file)
@@ -20,7 +23,7 @@ def fetch_housing_data(
     ignore_cache: bool,
 ) -> pd.DataFrame:
     if ignore_cache or not cache_file.exists():
-        raise ValueError("cache file must exist")
+        raise ValueError("cache file must exist") # TODO: in scrapper it is reading from database & saving to parquet in this case
     else:
         houses = fetch_housing_data_from_disk(cache_file=cache_file)
 
@@ -35,7 +38,7 @@ def serialize_house(house: pd.Series) -> House:
 def fetch_house_from_disk(house_id: str, cache_file: Path = HOUSES_CACHE) -> House:
     houses = fetch_housing_data_from_disk(cache_file=cache_file)
     houses = houses.set_index("id")
-    house_pandas: pd.Series = houses.loc[house_id]
+    house_pandas: pd.Series = houses.loc[house_id].copy()
     house_pandas["id"] = house_id
     house = serialize_house(house_pandas)
     return house
